@@ -189,6 +189,8 @@
         <!-- /footer content -->
       </div>
     </div>
+
+
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('js/app.js')}}"></script>
     <script src="{{ asset('vendors/moment/min/moment.min.js')}}"></script>
@@ -205,5 +207,8 @@
     <script src="{{ asset('vendors/nprogress/nprogress.js')}}"></script>
     <script src="{{ asset('vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js')}}"></script>
     <!-- <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script> -->
+
+   
+
   </body>
   </html>

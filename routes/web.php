@@ -29,7 +29,7 @@ Route::get('/storeDates', 'RoomReservationController@storeDates');
 
 Route::get('/searchAvailability', 'RoomReservationController@searchAvailability');
 
-Route::get('/storeChosenRoom', 'RoomReservationController@storeChosenRoom');
+Route::get('/storeDatesAndRooms', 'RoomReservationController@storeDatesAndRooms');
 
 // Route::get('/selectDates', 'SuperAdminController@select_dates');
 

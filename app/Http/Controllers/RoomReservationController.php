@@ -10,6 +10,7 @@ use App\User;
 use App\Room;
 use App\RoomType;
 use Carbon\Carbon;
+use DateTime;
 
 class RoomReservationController extends Controller
 {
@@ -111,7 +112,17 @@ class RoomReservationController extends Controller
         $start = new Carbon($reserve[0]);
         $end = new Carbon($reserve[1]);
 
-        $roomReservation = DB::table('room_reservations')
+        $for_dateInterval_start = new DateTime($start);
+        $for_dateInterval_end = new DateTime($end);
+        $interval = $for_dateInterval_start->diff($for_dateInterval_end);
+        $final_interval_result = $interval->format('%a');
+
+        $readable_start = date("l, j M Y", strtotime($start));
+        $readable_end = date("l, j M Y", strtotime($end));
+
+        $total_number_of_rooms = 0;
+
+        $roomReservationDates = DB::table('room_reservations')
                  ->whereBetween('check_in_date', [$start, $end])
                  ->get();
 
@@ -145,13 +156,28 @@ class RoomReservationController extends Controller
         //print_r($roomsAndRoomType);
         //exit();
 
-        return view('/superAdmin.room_reservation.select_rooms')->with(['roomsAndRoomTypes'=>$roomsAndRoomTypes]);
+        return view('/superAdmin.room_reservation.select_rooms')->with(['roomsAndRoomTypes'=>$roomsAndRoomTypes, 'start' => $readable_start, 'end' => $readable_end, 'final_interval_result' => $final_interval_result, 'total_number_of_rooms' => $total_number_of_rooms]);
     }
 
-    public function storeDates(Request $request){
+    public function storeDatesAndRooms(Request $request){
 
-        return view('superAdmin.room_reservation.select_rooms');
+        $roomReserve = \App\RoomType::where('id',$request->choosen_room_type_id)
+                                         ->get();
+        
+         $check_in_date = $request->choosen_check_in_date;
+         $check_out_date = $request->choosen_check_out_date;
+
+
+         $numbers =  $request->number_of_rooms;
+         print_r($numbers);exit();
+         // $number_of_rooms = $request->number_of_rooms;
+         $final_interval_result = $request->$number_of_rooms;
+
+
+
+        return view('superAdmin.room_reservation.make_payments')->with(['roomReserve'=>$roomReserve, 'start'=>$check_in_date, 'end'=>$check_out_date, 'number_of_rooms'=>$number_of_rooms, 'final_interval_result'=>$final_interval_result]);
     }
+
     public function storeChosenRoom(Request $request){
 
         return "rooms Stored";
