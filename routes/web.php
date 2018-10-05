@@ -17,6 +17,8 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::post('post-payment','PageController@postPayment');
+
 Auth::routes();
 
 Route::get('/dashboard', 'SuperAdminController@dashboard')->middleware('role');

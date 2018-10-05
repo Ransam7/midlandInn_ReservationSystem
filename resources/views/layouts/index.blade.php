@@ -34,10 +34,7 @@
 </head>
 
 <body>
-
-
-    @yield('content')
-
+  @yield('content')
   <script src="{{ asset('js/app.js')}}"></script>
 
   <!-- JavaScript Libraries -->
@@ -57,6 +54,47 @@
 
   <!-- Template Main Javascript File -->
   <script src="{{ asset('js/main-landing-page.js')}}"></script>
+  
+  <script type="text/javascript" >
+    
+    var base_url ="{{url('/')}}";
+    var csrf_token = "{{csrf_token()}}";
+
+    $(document).ready(function(){
+
+      //store state data
+      $('#test-pay').data('state',0);
+
+
+      $('#test-pay').click(function(e){
+
+        e.preventDefault();
+        if($(this).data('state')==0)
+        { 
+          $(this).html('Paying...');
+          $(this).data('state',1);
+          var total = $('#test-amount').val();
+          var thisHere = this;
+          $.post(base_url + '/post-payment',{total: total,_token: csrf_token},function(data){
+
+
+            console.log(data.response);
+            if(data.error_message=='')
+            {
+              //window.location.href = data.response.links[2].href;
+              //https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=EC-25A23949SX180641T
+            }
+            $(thisHere).html('Pay');
+            $(thisHere).data('state',0);
+          });
+        }
+
+      });
+
+    });
+
+
+  </script>
+
 </body>
 </html>
-
