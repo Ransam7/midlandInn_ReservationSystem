@@ -11,23 +11,46 @@
 |
 */
 
+
+Route::get('/shits', 'PageController@test');
 Route::get('/', function () {
     return view('home');
 });
 
 Auth::routes();
 
-Route::get('/dashboard', 'SuperAdminController@dashboard');
+Route::get('/dashboard', 'SuperAdminController@dashboard')->middleware('role');
 
-Route::resource('userAccount', 'UserAccountController');
+Route::get('/reservationSteps', 'RoomReservationController@reservationSteps');
 
-Route::get('/home', 'HomeController@index');
+Route::get('/storeDates', 'RoomReservationController@storeDates');
 
-Route::get('/super-admin','SampleController@getIndex')->middleware('role');
+Route::get('/searchAvailability', 'RoomReservationController@searchAvailability');
 
-Route::get('/gago','SampleController@getGago');
+Route::get('/storeChosenRoom', 'RoomReservationController@storeChosenRoom');
 
-Route::resource('user', 'UserSampleController');
+// Route::get('/selectDates', 'SuperAdminController@select_dates');
+
+Route::resource('userAccount', 'UserAccountController')->middleware('role:SuperAdmin');
+
+Route::resource('manageRoom', 'ManageRoomController')->middleware('role:SuperAdmin');
+
+Route::resource('manageRoomType', 'RoomTypeController')->middleware('role:SuperAdmin');
+
+Route::resource('manageAmenity', 'AmenityController')->middleware('role:SuperAdmin');
+
+Route::resource('roomReservation', 'RoomReservationController')->middleware('role');
+
+Route::get('/dashboard', 'SuperAdminController@dashboard')->name('dashboard')->middleware('role');
+
+Route::get('/home', 'HomeController@index')->name('home');
+
 Route::get('api/user', 'UserAccountController@apiUser')->name('api.user');
 
-Route::get('test','PageController@test');
+Route::get('api/room', 'ManageRoomController@apiRoom')->name('api.room');
+
+Route::get('api/roomType', 'RoomTypeController@apiRoomType')->name('api.roomType');
+
+Route::get('api/amenity', 'AmenityController@apiAmenity')->name('api.amenity');
+
+Route::get('api/roomReservation', 'RoomReservationController@apiRoomReservation')->name('api.roomReservation');

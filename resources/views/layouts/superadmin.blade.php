@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -6,15 +8,27 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" href="images/favicon.ico" type="image/ico" />
+	<!-- Favicons -->
+  <link href="{{ asset('img/midlandinn.png')}}" rel="icon">
+  <link href="{{ asset('img/midlandinn-apple-touch.png')}}" rel="apple-touch-icon">
 
     <title>{{ config('app.name', 'MidLand Inn') }}</title>
 
     <!-- Custom Theme Style -->
     <link href="{{ asset('css/app.css')}}" rel="stylesheet">
+    <link href="{{ asset('vendors/bootstrap-daterangepicker/daterangepicker.css')}}" rel="stylesheet">
     <!-- <link href="{{ asset('css/customCSS.css')}}" rel="stylesheet"> -->
-    <!-- <link href="{{ asset('assets/datatables/css/dataTables.bootstrap.min.css')}}" rel="stylesheet"> -->
-    <link href="{{ asset('datatables.net-bs/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('vendors/datatables/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
+    <!-- <link href="{{ asset('vendors/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet"> -->
+    <link href="{{ asset('vendors/datatables.net-bs/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
+    
+    <link href="{{ asset('vendors/switchery/dist/switchery.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('vendors/iCheck/skins/flat/green.css')}}" rel="stylesheet">
+    <link href="{{ asset('vendors/select2/dist/css/select2.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('vendors/starrr/dist/starrr.css')}}" rel="stylesheet">
+
+    <link href="{{ asset('vendors/nprogress/nprogress.css')}}" rel="stylesheet">
+    
   </head>
 
   <body class="nav-md" id="app">
@@ -35,7 +49,7 @@
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
-                <h2>{{ Auth::user()->name }}</h2>
+                <h2>{{ Auth::user()->fname }} {{ Auth::user()->lname }}</h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -54,27 +68,24 @@
                       <li><a href="index3.html">Dashboard3</a></li>
                     </ul>
                   </li> -->
+
+
                   <li><a href="{{ url('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-                  <li><a href="{{ url('userAccount')}}"><i class="fa fa-users"></i> User Accounts</a></li>
-                  
-                </ul>
-              </div>
-              <div class="menu_section">
-                <h3>Live On</h3>
-                <ul class="nav side-menu">
-                  
-                  <li><a><i class="fa fa-windows"></i> Extras <span class="fa fa-chevron-down"></span></a>
+                  <li><a href="{{ url('roomReservation')}}"><i class="fa fa-book"></i> Reservations</a></li>
+                  @if(Auth::user()->userRole->role_name == 'SuperAdmin')
+                  <li><a><i class="fa fa-bed"></i> Rooms <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="page_403.html">403 Error</a></li>
-                      <li><a href="page_404.html">404 Error</a></li>
-                      <li><a href="page_500.html">500 Error</a></li>
-                      <li><a href="plain_page.html">Plain Page</a></li>
-                      <li><a href="login.html">Login Page</a></li>
-                      <li><a href="pricing_tables.html">Pricing Tables</a></li>
+                      <li><a href="{{ url('manageRoom')}}">Manage Rooms</a></li>
+                      <li><a href="{{ url('manageRoomType')}}">Manage Room Types</a></li>
+                      <li><a href="{{ url('manageAmenity')}}">Manage Room Amenities</a></li>
                     </ul>
                   </li>
+                  <li><a href="{{ url('userAccount')}}"><i class="fa fa-users"></i> User Accounts</a></li>
+                  @endif
+                  
                 </ul>
               </div>
+              
 
             </div>
             <!-- /sidebar menu -->
@@ -109,10 +120,11 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="{{asset('img/admin.jpg')}}" alt="">{{ Auth::user()->name }}
+                    <img src="{{asset('img/admin.jpg')}}" alt="">{{ Auth::user()->fname }} {{ Auth::user()->lname }}
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <li><a href="{{route('home')}}"> Home Page</a></li>
                     <li><a href="javascript:;"> Profile</a></li>
                     <li>
                       <a href="javascript:;">
@@ -209,21 +221,29 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            </a>
           </div>
           <div class="clearfix"></div>
         </footer>
         <!-- /footer content -->
       </div>
     </div>
-
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('js/app.js')}}"></script>
-    <script src="{{ asset('datatables.net/js/jquery.dataTables.min.js')}}"></script>
-    <script src="{{ asset('datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
-    
+    <script src="{{ asset('vendors/moment/min/moment.min.js')}}"></script>
+    <script src="{{ asset('vendors/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{ asset('vendors/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
+    <script src="{{ asset('vendors/switchery/dist/switchery.min.js')}}"></script>
+    <script src="{{ asset('vendors/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
 
-    <!-- <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script> -->s
+    <script src="{{ asset('vendors/iCheck/icheck.min.js')}}"></script>
+    <script src="{{ asset('vendors/select2/dist/js/select2.full.min.js')}}"></script>
+    <script src="{{ asset('vendors/starrr/dist/starrr.js')}}"></script>
+    
+    <script src="{{ asset('vendors/fastclick/lib/fastclick.js')}}"></script>
+    <script src="{{ asset('vendors/nprogress/nprogress.js')}}"></script>
+    <script src="{{ asset('vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js')}}"></script>
+    <!-- <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script> -->
 
     <script>
       $(document).ready(function(){
@@ -247,6 +267,90 @@
             
     </script>
 
+    <script>
+      $(document).ready(function(){
+        
+        $('#rooms-table').DataTable({
+                serverSide: true,
+                processing: true,
+                ajax: "{{ route('api.room')}}",
+                columns: [
+                    {data: 'room_number', name:'room_number'},
+                    {data: 'room_type_name', name:'room_type_name'},
+                    {data: 'room_status', name:'room_status'},
+                    {data: 'action', name:'action', orderable: false, searchable: false},
+                    // , orderable: false, searchable: false
+                ]
+            });
+      });
+            
+    </script>
+
+    <script>
+      $(document).ready(function(){
+        
+        $('#room-types-table').DataTable({
+                serverSide: true,
+                processing: true,
+                ajax: "{{ route('api.roomType')}}",
+                columns: [
+                    {data: 'room_type_name', name:'room_type_name'},
+                    {data: 'room_type_desc', name:'room_type_desc'},
+                    {data: 'room_type_rates', name:'room_type_rates'},
+                    {data: 'room_type_person_occupy', name:'room_type_person_occupy'},
+                    {data: 'room_type_status', name:'room_type_status'},
+                    {data: 'action', name:'action', orderable: false, searchable: false},
+                    // , orderable: false, searchable: false
+                ]
+            });
+      });
+            
+    </script>
+
+    <script>
+      $(document).ready(function(){
+        
+        $('#room-amenity-table').DataTable({
+                serverSide: true,
+                processing: true,
+                ajax: "{{ route('api.amenity')}}",
+                columns: [
+                    {data: 'amenity_name', name:'amenity_name'},
+                    {data: 'amenity_status', name:'amenity_status'},
+                    {data: 'action', name:'action', orderable: false, searchable: false},
+                    // , orderable: false, searchable: false
+                ]
+            });
+      });
+            
+    </script>
+
+    <script>
+      $(document).ready(function(){
+        
+        $('#room-reservation-table').DataTable({
+                serverSide: true,
+                processing: true,
+                ajax: "{{ route('api.roomReservation')}}",
+                columns: [
+                    {data: 'transac_code', name:'transac_code'},
+                    {data: 'fname', name:'fname'},
+                    {data: 'lname', name:'lname'},
+                    {data: 'check_in_date', name:'check_in_date'},
+                    {data: 'check_out_date', name:'check_out_date'},
+                    {data: 'payment', name:'payment'},
+                    {data: 'numb_of_room', name:'numb_of_room'},
+                    {data: 'action', name:'action', orderable: false, searchable: false},
+                    // , orderable: false, searchable: false
+                ]
+            });
+      });
+            
+    </script>
+
+
+
+
     <script type="text/javascript">
 
       $('#delete-user-modal').on('show.bs.modal', function (event){
@@ -256,6 +360,45 @@
         var modal = $(this)
         
         modal.find('.modal-body #userAccount_id').val(userAccount_id);
+      })
+
+      $('#view-room-type-modal').on('show.bs.modal', function (event){
+        console.log('Modal Opened');
+        var button = $(event.relatedTarget)
+        var room_type_id = button.data('myrid')
+        var room_type_name = button.data('myrname')
+        var room_type_desc = button.data('myrdesc')
+        var room_type_rates = button.data('myrrates')
+        var room_type_amenities = button.data('myrameni')
+        var room_type_status = button.data('myrstat')
+        var room_type_status_label = "";
+        if (room_type_status == 'AVAILABLE') {
+                room_type_status_label = "label label-primary";
+        }else{  room_type_status_label = "label label-danger";}
+        
+        
+
+        var room_type_status_attr = " ";
+        var room_type_image = button.data('myrimage')
+        var room_type_image_path = '/storage/room_type_images/'+room_type_image;
+        var modal = $(this)
+
+        
+        
+        modal.find('.modal-body #room_id').html(room_type_id);
+        modal.find('.modal-body #room_name').html(room_type_name);
+        modal.find('.modal-body #room_desc').html(room_type_desc);
+        modal.find('.modal-body #room_rates').html(room_type_rates);
+        modal.find('.modal-body #room_amenities').html(room_type_amenities);
+        modal.find('.modal-body #room_status').html(room_type_status);
+
+        modal.find('.modal-body #room_status').attr("class", room_type_status_label);
+
+        modal.find('.modal-body #room_image').html(room_type_image);
+        modal.find('.modal-body #room_image_path').html(room_type_image_path);
+      
+        modal.find('.modal-body #room_image').attr("src", room_type_image_path);
+
       })
     </script>
   </body>

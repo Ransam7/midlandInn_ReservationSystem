@@ -66,7 +66,7 @@ class UserAccountController extends Controller
         $user->address = $request->input('address');
         $user->save();
 
-        return redirect('/userAccount');
+        return redirect('/userAccount')->with('success', 'New Account Created Succesfully!');
 
         // User::create([
         //     'name' => $request['name'],
@@ -131,7 +131,7 @@ class UserAccountController extends Controller
         $user->address = $request->input('address');
         $user->save();
 
-        return redirect('/userAccount');
+        return redirect('/userAccount')->with('success', $user->fname.' '.$user->lname.' Account Edited Succesfully!');
 
         // $users = User::findOrFail($request->userAccount_id);
         // $users->update($request->all());
@@ -147,8 +147,9 @@ class UserAccountController extends Controller
     public function destroy(Request $request)
     {
         $users = User::findOrFail($request->userAccount_id);
+        $users_name = $users->fname.' '.$users->lname;
         $users->delete();
-        return redirect('/userAccount');
+        return redirect('/userAccount')->with('success', $users_name.' account has been deleted!');
     }
 
     public function apiUser(){

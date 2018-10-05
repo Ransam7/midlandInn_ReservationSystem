@@ -5,7 +5,9 @@
                 <h3>User Accounts</h3>
               </div>
             </div>
-
+            
+            <div class="clearfix"></div>
+            @include('superAdmin.inc.messages')
   <div class="col-md-12 col-sm-6 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">

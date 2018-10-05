@@ -7,9 +7,9 @@
                 <h3>Users Account</h3>
               </div>
             </div>
-
+            
             <div class="clearfix"></div>
-
+            @include('superAdmin.inc.messages')
               <div class="col-md-12 col-sm-11 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
@@ -83,3 +83,4 @@
               <div class="clearfix"></div>
               
 @endsection
+

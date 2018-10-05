@@ -1,56 +1,62 @@
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <title>{{ config('app.name', 'MidLand Inn') }}</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+  <!-- Favicons -->
+  <link href="{{ asset('img/midlandinn.png')}}" rel="icon">
+  <link href="{{ asset('img/midlandinn-apple-touch.png')}}" rel="apple-touch-icon">
 
-    <title>{{ config('app.name', 'MidLand Inn') }}</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Poppins:300,400,500,700" rel="stylesheet">
 
-    <!-- Scripts -->
-    <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
+  <!-- Bootstrap CSS File -->
+  <!-- <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css')}}"> -->
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+  <!-- Bootstrap CSS File -->
+  <link href="{{ asset('vendors/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 
-    <!-- Styles -->
-    <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
-    <!-- <link href="{{ asset('css/appCustom.css') }}" rel="stylesheet"> -->
+  <link href="{{ asset('vendors/bootstrap-daterangepicker/daterangepicker.css')}}" rel="stylesheet">
+  <!-- Libraries CSS Files -->
+  <link href="{{ asset('vendors/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
+  <link href="{{ asset('vendors/animate/animate.min.css')}}" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/css_LandingPage/bootstrap.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/css_LandingPage/font-awesome.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/css_LandingPage/animate.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/css_LandingPage/animate_carousel.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/css_LandingPage/style_carousel.css')}}">
-    <link rel="stylesheet" href="{{ asset('css/css_LandingPage/owl.carousel.css')}}"/>
-    <!-- <link rel="stylesheet" href="{{ asset('css/css_LandingPage/style2.css')}}"/> -->
-    <link rel="stylesheet" href="{{ asset('css/css_LandingPage/style.css')}}"/>
+  <!-- Main Stylesheet File -->
+  <link href="{{ asset('css/style-landing-page.css')}}" rel="stylesheet">
 
+  
 </head>
-<body>
-    <!-- Page Preloder -->
-    <div id="preloader">
-        <div class="loader"></div>
-    </div>
-    @include('home.inc.navbar')
-    <div id="app">
-        <main class="py-4">
-                @yield('content')
-                @include('home.inc.footer')
-        </main>
-    </div>
 
-    <script src="{{ asset('js/js_LandingPage/jquery.min.js')}}"></script>
-    <script src="{{ asset('js/js_LandingPage/jquery.easing.min.js')}}"></script>
-    <script src="{{ asset('js/js_LandingPage/bootstrap.min.js')}}"></script>
-    <script src="{{ asset('js/js_LandingPage/wow.js')}}"></script>
-    <script src="{{ asset('js/js_LandingPage/custom.js')}}"></script>
-    <script src="{{ asset('js/js_LandingPage/owl.carousel.min.js')}}"></script>
-    <!-- <script src="{{ asset('js/js_LandingPage/main2.js')}}"></script> -->
-    <script src="{{ asset('js/js_LandingPage/main.js')}}"></script>
+<body>
+
+
+    @yield('content')
+
+  <script src="{{ asset('js/app.js')}}"></script>
+
+  <!-- JavaScript Libraries -->
+  <script src="{{ asset('vendors/jquery/jquery-migrate.min.js')}}"></script>
+  <script src="{{ asset('vendors/moment/min/moment.min.js')}}"></script>
+  <script src="{{ asset('vendors/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{ asset('vendors/easing/easing.min.js')}}"></script>
+  <script src="{{ asset('vendors/wow/wow.min.js')}}"></script>
+  <script src="{{ asset('vendors/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8HeI8o-c1NppZA-92oYlXakhDPYR7XMY"></script>
+
+  <script src="{{ asset('vendors/waypoints/waypoints.min.js')}}"></script>
+  <script src="{{ asset('vendors/counterup/counterup.min.js')}}"></script>
+  <script src="{{ asset('vendors/superfish/hoverIntent.js')}}"></script>
+  <script src="{{ asset('vendors/superfish/superfish.min.js')}}"></script>
+  
+
+  <!-- Template Main Javascript File -->
+  <script src="{{ asset('js/main-landing-page.js')}}"></script>
 </body>
 </html>
+

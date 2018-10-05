@@ -984,7 +984,6 @@ module.exports = __webpack_require__(56);
 __webpack_require__(11);
 
 window.Vue = __webpack_require__(49);
-
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -1018,6 +1017,7 @@ try {
 } catch (e) {}
 
 __webpack_require__(29);
+
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the

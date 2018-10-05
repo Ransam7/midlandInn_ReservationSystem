@@ -30,10 +30,10 @@ class CheckRole
             {
                 if($role==null)
                 {
-                    $checkRole = $this->auth->user()->userRole->name;
+                    $checkRole = $this->auth->user()->userRole->role_name;
 
                     if($checkRole==='Customer')
-                        return redirect('404');
+                        return redirect('/home');
                 }
                 
             }else
@@ -45,7 +45,7 @@ class CheckRole
 
             if($this->auth->check() && $this->auth->user()->userRole())
             {
-                $checkRole = $this->auth->user()->userRole->name;
+                $checkRole = $this->auth->user()->userRole->role_name;
                 if($role!==$checkRole)
                     return redirect('404');
             }else
